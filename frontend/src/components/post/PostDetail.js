@@ -9,6 +9,7 @@ import { fetchAllPosts, fetchAllCommentsByPostId,
          editComment, editPost } from './../../actions/index'
 import Comment from './../comment/Comment'
 import Post from './Post'
+import NotFound from './NotFound'
 
 class PostDetail extends Component {
   static propTypes = {
@@ -79,13 +80,15 @@ class PostDetail extends Component {
     const { post, comments } = this.props;
     return(
       <div className='app'>
-        {post && (
+        {post ? (
           <Post key={post.id} post={post} 
                 history={this.props.history}
                 showCommentButton={true}
                 openCreateCommentModal={this.openCreateCommentModal} />
+        ):(
+          <NotFound/>
         )}
-        {comments && (
+        {post && comments && (
         <div className='comments-container'>
           <ol className='comments-list'>
               {comments.map(comment => (

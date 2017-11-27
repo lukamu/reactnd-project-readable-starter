@@ -4,8 +4,7 @@ import PropTypes from 'prop-types'
 import { Link } from 'react-router-dom'
 import { Modal } from 'react-bootstrap';
 import { formatTimestamp, labelColor } from '../../utils/utils'
-import { updateVotePost, fetchAllPosts, 
-         fetchAllCommentsByPostId, deletePost, editPost } from './../../actions/index'
+import * as actions from './../../actions/index'
 import { FaThumbsOUp, FaThumbsODown } from 'react-icons/lib/fa';
 
 
@@ -144,5 +143,4 @@ function mapStateToProps(state, { post }) {
   }
 }
 
-export default connect(mapStateToProps, 
-  { updateVotePost, deletePost, editPost, fetchAllPosts, fetchAllCommentsByPostId })(Post);
+export default connect(mapStateToProps, actions)(Post);

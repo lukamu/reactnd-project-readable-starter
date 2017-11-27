@@ -21,7 +21,7 @@ class App extends Component {
   }
   
   componentDidMount() {
-    this.props.dispatch(fetchCategories());
+    this.props.fetchCategories();
   }
 
   handleAddPost = (e) => {
@@ -96,9 +96,8 @@ class App extends Component {
                   <select name="category" className="field-select">
                     {this.props.cat && this.props.cat.map((category) => {
                       return(
-                        category.name !=='all' && (
                         <option key={category.name} value={category.name}>{category.name}</option>
-                      ))}
+                      )}
                     )}
                   </select>
                   <textarea name="body" placeholder="Insert your comment" required/>
@@ -120,16 +119,12 @@ class App extends Component {
     }
 }
 
-function mapStatetoProps(state) {
+function mapStatetoProps({ categories }) {
   return { 
-    /* 
-    * Return an array of objects, adding 'all' to the list.
-    * The user can always select 'all' to see all the posts.
-    */
-    cat: state.categories.concat({ name: 'all', path: ''}) 
+    cat: categories
   }
 }
 
 
-export default withRouter(connect(mapStatetoProps)(App));
+export default withRouter(connect(mapStatetoProps, { fetchCategories })(App));
 
